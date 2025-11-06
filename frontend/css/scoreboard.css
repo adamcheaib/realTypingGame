@@ -1,0 +1,121 @@
+.hide {
+    display: none !important;
+}
+
+.qr_container {
+    padding: 20px;
+    width: max-content;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-inline: auto;
+    text-align: center;
+    font-family: Arial;
+    align-items: center;
+    gap: 10px;
+}
+
+.qr_container > button, .to_leaderboard_btn {
+    width: max-content;
+    padding: 10px;
+    font-size: 30px;
+    background-color: var(--main-color);
+    color: var(--inner-color);
+    text-shadow: 2px 2px black;
+    border: none;
+    border-radius: 10px;
+}
+
+.qr_container > button:hover, .qr_container > button:active, .to_leaderboard_btn:hover, .to_leaderboard_btn:active {
+    background-color: var(--inner-color);
+    color: var(--main-color);
+}
+
+.qr_code {
+    height: 500px;
+    width: 500px;
+}
+
+.stats {
+    width: 1200px;
+    height: 500px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+    margin-top: 100px;
+    border-radius: 20px;
+    box-shadow: 3px 3px var(--inner-color);
+    font-family: Arial;
+    animation: blur_entrance 5s forwards;
+}
+
+.stats img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.stats > p {
+    color: var(--main-color);
+    text-shadow: 2px 2px black;
+    font-size: 75px;
+}
+
+@keyframes blur_entrance {
+    from {
+        filter: blur(20px);
+        margin-bottom: 200px;
+        margin-left: 150px;
+    }
+
+    to {
+        filter: blur(0);
+        margin-inline: auto;
+        margin-top: 20px;
+    }
+}
+
+.leaderboard {
+    width: 500px;
+    height: 700px;
+    max-height: 700px;
+    background-color: var(--main-color);
+    text-shadow: 1px 1px black;
+    font-family: Arial;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 21px;
+    margin-top: 30px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    animation: leaderboard_entrance 3s forwards;
+}
+
+.leaderboard button {
+    height: 30px;
+    width: 120px;
+    justify-self: end;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 8px;
+}
+
+.leaderboard li {
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+}
+
+@keyframes leaderboard_entrance {
+    from {
+        transform: rotate(0) scale(0.05)
+    }
+
+    to {
+        transform: rotate(720deg) scale(1);
+    }
+}
