@@ -1,0 +1,51 @@
+.landing_container {
+    width: 1200px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+.landing_container > img {
+    width: 500px;
+    height: 300px;
+}
+
+.player_inputs {
+    display: grid;
+    width: 300px;
+    row-gap: 20px;
+}
+
+.player_inputs > input {
+    height: 35px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.player_inputs > button {
+    font-size: 32px;
+    width: 120px;
+    justify-self: center;
+    background-color: var(--main-color);
+    border: solid 2px var(--inner-color);
+    border-radius: 8px;
+    transition: color 500ms, background-color 500ms, transform 200ms;
+    transform: scale(1);
+}
+
+.player_inputs > button:hover {
+    background-color: var(--inner-color);
+    color: var(--main-color);
+    transform: scale(1.1);
+    cursor: pointer;
+    transition: color 500ms, background-color 500ms, transform 200ms;
+}
+
+.player_inputs > button:active {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+}

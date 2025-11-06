@@ -1,0 +1,1 @@
+export const gameplay_text = `Här sitter jag på gymnasiemässan och kämpar för att skriva den bästa texten någonsin! Jag skriver snabbt, tänker smart och hoppas vinna priset. Malmö är ju helt klart en fantastisk stad, men vilken skola är egentligen bäst? Så klart, Realgymnasiet! Nu kör vi!`;

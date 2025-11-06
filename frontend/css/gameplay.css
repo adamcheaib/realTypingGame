@@ -1,0 +1,81 @@
+.gameplay_screen {
+    display: grid;
+    justify-items: center;
+    margin-top: 100px;
+    width: 800px;
+    margin-inline: auto;
+}
+
+.gameplay_header {
+    background-color: var(--main-color);
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    color: var(--secondary-color);
+    text-align: center;
+    font-weight: bold;
+}
+
+.text_to_write {
+    background-color: black;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.current_letter {
+    background-color: yellow;
+    animation: current_letter_animation 1000ms infinite
+}
+
+.wrong {
+    color: red;
+}
+
+.correct {
+    color: green;
+}
+
+@keyframes current_letter_animation {
+    from {
+        background-color: #0da45c;
+    }
+
+    to {
+        background-color: black;
+    }
+}
+
+.countdown_dialog {
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog_box {
+    height: 600px;
+    width: 600px;
+    background-color: var(--main-color);
+    border-radius: 20px;
+    animation: countdown infinite 650ms alternate;
+}
+
+@keyframes countdown {
+    from {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
