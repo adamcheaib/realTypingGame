@@ -8,14 +8,14 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/register", async (req, res) => {
-    const {name, school, score} = req.body;
+    const {name, school, score, phone} = req.body;
 
     const db = JSON.parse(fs.readFileSync(path.join(__dirname, "db.json"), "utf-8"));
-    console.log(name, school, score);
     db.push({
         name: name,
         school: school,
         score: score,
+        phone: phone
     });
 
     fs.writeFileSync(path.join(__dirname, "db.json"), JSON.stringify(db, null, 2));

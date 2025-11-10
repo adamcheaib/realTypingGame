@@ -18,13 +18,14 @@
 
 .text_to_write {
     background-color: black;
-    padding: 10px 10px 10px 10px;
+    padding: 10px;
     box-sizing: border-box;
     display: flex;
     width: 100%;
     font-family: Arial;
     font-weight: bold;
     font-size: 20px;
+    flex-wrap: wrap;
 }
 
 .current_letter {
@@ -63,11 +64,22 @@
 }
 
 .dialog_box {
-    height: 600px;
+    height: 400px;
     width: 600px;
     background-color: var(--main-color);
     border-radius: 20px;
-    animation: countdown infinite 650ms alternate;
+    /*animation: countdown infinite 650ms alternate;*/
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    color: white;
+    padding: 20px;
+    font-family: Arial;
+    text-shadow: 1px 1px black;
+}
+
+.dialog_timer {
+    text-align: center;
 }
 
 @keyframes countdown {

@@ -94,6 +94,7 @@
     display: grid;
     grid-template-rows: max-content 1fr;
     animation: leaderboard_entrance 3s forwards;
+    overflow-y: scroll;
 }
 
 .leaderboard button {

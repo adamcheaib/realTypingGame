@@ -54,3 +54,7 @@ fieldset {
     display: grid;
     margin-bottom: 25px;
 }
+
+a, a:visited {
+    color: red;
+}

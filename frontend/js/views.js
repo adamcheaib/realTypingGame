@@ -13,6 +13,7 @@ function render_user_input_page() {
         <form class="landing_container">
             <img src="./media/cat_animation.gif" alt="">
             <div class="guide">
+                <h1>HUR SNABBT KAN DU SKRIVA!?</h1>
                 <h2>Instruktioner</h2>
                 <i>Du kommer att få en text på skärmen som du ska skriva av.</i>
                 <ol>
@@ -46,6 +47,7 @@ function render_user_input_page() {
             <div class="player_inputs">
                 <input class="input_full_name" type="text" name="name" placeholder="Ditt namn" required>
                 <input class="input_school_name" type="text" name="school" placeholder="Din skola" required>
+                <input type="text" name="phone" id="test" placeholder="Telefonnummer (optional)">
                 <button type="submit">Starta</button>
             </div>
     </form>`;
@@ -57,6 +59,8 @@ function render_user_input_page() {
         localStorage.setItem("name", form_data.get("name"));
         localStorage.setItem("school", form_data.get("school"));
         localStorage.setItem("difficulty", form_data.get("difficulty"));
+        localStorage.setItem("phone", form_data.get("phone"));
+
         select_difficulty(form_data.get("difficulty"));
         render_gameplay();
     }
@@ -66,8 +70,9 @@ function render_gameplay() {
     main_container.innerHTML = `
         <div class="countdown_dialog">
             <div class="dialog_box">
-                <h1 class="dialog_timer">3</h1>
+                <h2>1. Du ska nu få skriva texten som visas på skärmen. <br><br> 2. Varje gång du är färdig med ett ord så trycker du på mellanslag. <br> </h2>
                 <h2 class="dialog_message">Gör dig redo!</h2>
+                <h1 class="dialog_timer">Du börjar om 3</h1>
             </div>
         </div>
 
@@ -86,8 +91,6 @@ function render_gameplay() {
     // Creates an array of each letter in the game text.
     const gameplay_letters = [...gameplay_text];
 
-    // TODO: add each cluster of spans into a div so that they stay together. Might need some gameplay adjustments.
-
     // Creates a an array with a span of each letter in the game.
     const gameplay_spans = gameplay_letters.map(letter => {
         const letter_span = document.createElement("span");
@@ -102,8 +105,8 @@ function render_gameplay() {
     gameplay_spans[0].className = "current_letter";
     gameplay_spans.forEach(span => text_container.appendChild(span));
 
-    setTimeout(() => dialog_timer.textContent = "2", 1000);
-    setTimeout(() => dialog_timer.textContent = "1", 2000);
+    setTimeout(() => dialog_timer.textContent = "Du börjar om 2", 3000);
+    setTimeout(() => dialog_timer.textContent = "Du börjar om 1", 4000);
 
     // Gameplay loop starts here
     setTimeout(() => {
@@ -113,7 +116,7 @@ function render_gameplay() {
 
             if (time_left === 0) {
                 clearInterval(game_interval);
-                console.log("Game is over!");
+                alert("Tiden är ute! Bra försök!");
                 add_score(score);
                 render_leaderboard();
                 window.onkeydown = null;
@@ -145,6 +148,7 @@ function render_gameplay() {
 
                     add_score(score);
                     clearInterval(game_interval);
+                    alert("Du är färdig! Mycket bra jobbat!");
                     render_leaderboard();
                     window.onkeydown = null;
                 }
@@ -153,15 +157,15 @@ function render_gameplay() {
             }
 
         };
-    }, 3000);
+    }, 5000);
 
 }
 
 function render_leaderboard() {
     main_container.innerHTML = `
     <div class="qr_container">
-        <h1>Skanna QR-koden</h1>
-        <img class="qr_code" src="./media/qr.png" alt="">
+<!--        <h1>Klicka <b style="color: red"><a href="https://larande.arksysweb.com/index.php?entryPoint=webtolead" target="_blank">Här</a></b></h1>-->
+        <a href="https://larande.arksysweb.com/index.php?entryPoint=webtolead" target="_blank"><img class="qr_code" src="./media/qr.png" alt=""></a>
         <button class="qr_confirm">Bekräfta</button>
     </div>
 
@@ -177,15 +181,6 @@ function render_leaderboard() {
     </div>`;
 
     const leaderboard_ol = document.querySelector(".leaderboard > ol");
-    fetch("http://localhost:1234/leaderboard").then(r => r.json()).then(data => {
-        const sorted_data = data.db.sort((a,b) => b.score - a.score);
-        console.log(sorted_data);
-        sorted_data.forEach(row => {
-            const player = document.createElement("li");
-            player.innerHTML = `<p>${row.name}</p><p>${row.school}</p><p>${row.score} poäng</p>`;
-            leaderboard_ol.appendChild(player);
-        })
-    })
 
     const qr_confirm_btn = document.querySelector(".qr_confirm");
     const to_leaderboard_btn = document.querySelector(".to_leaderboard_btn");
@@ -197,6 +192,16 @@ function render_leaderboard() {
 
         // TODO: send the stats here!
         await register_score_to_db();
+
+        // Fetches the leaderboard here.
+        fetch("http://localhost:1234/leaderboard").then(r => r.json()).then(data => {
+            const sorted_data = data.db.sort((a, b) => b.score - a.score);
+            sorted_data.forEach(row => {
+                const player = document.createElement("li");
+                player.innerHTML = `<p>${row.name}</p><p>${row.school}</p><p>${row.score} poäng</p>`;
+                leaderboard_ol.appendChild(player);
+            })
+        })
     }
 
     to_leaderboard_btn.onclick = (e) => {
